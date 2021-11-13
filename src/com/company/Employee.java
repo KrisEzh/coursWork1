@@ -6,21 +6,15 @@ public class Employee {
     private String fullName;
     private int departmentNum;
     private int salary;
+    private int id;
     private static int count = 1;
 
-    public Employee(String fullName, int departmentNum, int salary, int getCount) {
+    public Employee(String fullName, int departmentNum, int salary) {
         this.fullName = fullName;
         this.departmentNum = departmentNum;
         this.salary = salary;
-        this.count = count++;
-
+        this.id = count++;
     }
-
-   public static int getCount()
-        {
-            return count++;
-        }
-
 
     public String getFullName() {
         return fullName;
@@ -33,8 +27,7 @@ public class Employee {
         return salary;
     }
 
-    public void setSalary(int salary)
-    {
+    public void setSalary(int salary) {
         this.salary = salary;
     }
 
@@ -45,14 +38,10 @@ public class Employee {
     @Override
     public String toString() {
         return "Employee" +
-                " id " + getCount() +
+                " id "  +
                 ", fullName " + getFullName() +
                 ", dep.number " + getDepartmentNum() +
                 ", salary " +  getSalary();
     }
-
-
-
-
 
 }
