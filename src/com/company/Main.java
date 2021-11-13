@@ -8,8 +8,12 @@ import java.util.stream.Collectors;
 import static com.company.Employee.getCount;
 
 public class Main {
+    private static Employee employee;
+    Employee[] person;
 
-
+    public Main(Employee[] person) {
+        this.person = person;
+    }
 
     public static void main(String[] args) {
 
@@ -18,11 +22,11 @@ public class Main {
         Employee three = new Employee("Сергеев Сергей Сергеевич", 3, 60_000, getCount());
         Employee four = new Employee("Александров Александр Александрович", 4, 75_000, getCount());
         Employee five = new Employee("Алексеев Алексей Алексеевич", 5, 45_000, getCount());
-        Employee six = new Employee("Романов Роман Романович", 6, 30_000, getCount());
-        Employee seven = new Employee("Георгиев Георгий Георгиевич", 7, 100_000, getCount());
-        Employee eight = new Employee("Евгеньев Евгений Евгеньевич", 8, 25_000, getCount());
-        Employee nine = new Employee("Миронов Мирон Миронович", 9, 40_000, getCount());
-        Employee ten = new Employee("Гордеев Гордей Гордеевич", 10, 50_000, getCount());
+        Employee six = new Employee("Романов Роман Романович", 1, 30_000, getCount());
+        Employee seven = new Employee("Георгиев Георгий Георгиевич", 2, 95_000, getCount());
+        Employee eight = new Employee("Евгеньев Евгений Евгеньевич", 3, 25_000, getCount());
+        Employee nine = new Employee("Миронов Мирон Миронович", 4, 40_000, getCount());
+        Employee ten = new Employee("Гордеев Гордей Гордеевич", 5, 50_000, getCount());
 
         Employee[] person = new Employee[10];
         addNewEmployee(person, one);
@@ -36,12 +40,6 @@ public class Main {
         addNewEmployee(person, nine);
         addNewEmployee(person, ten);
 
-        // person[0] = new Employee("Иванов Иван Иванович", 1, 80_000, getCount());
-        //person[1] = new Employee("Петров Петр Петрович", 2, 85_000, getCount());
-        //person[2] = new Employee("Сергеев Сергей Сергеевич", 3, 60_000, getCount());
-        //person[3] = new Employee("Александров Александр Александрович", 4, 75_000, getCount());
-       // person[4] = new Employee("Алексеев Алексей Алексеевич", 5, 45_000, getCount());
-
         System.out.println("Employees");
         System.out.println(one);
         System.out.println(two);
@@ -54,40 +52,103 @@ public class Main {
         System.out.println(nine);
         System.out.println(ten);
 
-        List<Employee> salaries = Arrays.asList(one,two, three, four, five, six, seven, eight, nine ,ten);
+        List<Employee> salaries = Arrays.asList(one, two, three, four, five, six, seven, eight, nine, ten);
 
         Employee min = salaries.stream().collect(Collectors.minBy(Comparator.comparingInt(Employee::getSalary))).get();
-        System.out.println("Employee with min salary : " + min );
+        System.out.println("Employee with min salary : " + min);
 
         Employee max = salaries.stream().collect(Collectors.maxBy(Comparator.comparingInt(Employee::getSalary))).get();
         System.out.println("Employee with max salary : " + max);
 
-    //    for (int i = 0; i < person.length; i++) {
-      //      System.out.println(employee.getFullName());
-        //}
+        System.out.println("Общая сумма затрат на зарплаты: " + salarySum(person));
+        System.out.println("Среднее значение зарплат: " + middleSalary(person));
+
+        for (Employee employee : person) {
+            if (employee != null) {
+                printFullName(employee);
+            }
+        }
+        System.out.println("Индексация зарплат на 1.05% для каждого сотрудника: ");
+        one.setSalary((int) (one.getSalary() * 1.05));
+        System.out.println(one.getSalary());
+        two.setSalary((int) (two.getSalary() * 1.05));
+        System.out.println(two.getSalary());
+        three.setSalary((int) (three.getSalary() * 1.05));
+        System.out.println(three.getSalary());
+        four.setSalary((int) (four.getSalary() * 1.05));
+        System.out.println(four.getSalary());
+        five.setSalary((int) (five.getSalary() * 1.05));
+        System.out.println(five.getSalary());
+        six.setSalary((int) (six.getSalary() * 1.05));
+        System.out.println(six.getSalary());
+        seven.setSalary((int) (seven.getSalary() * 1.05));
+        System.out.println(seven.getSalary());
+        eight.setSalary((int) (eight.getSalary() * 1.05));
+        System.out.println(eight.getSalary());
+        nine.setSalary((int) (nine.getSalary() * 1.05));
+        System.out.println(nine.getSalary());
+        ten.setSalary((int) (ten.getSalary() * 1.05));
+        System.out.println(ten.getSalary());
+
+        minAndMaxSalaryInDepartment(1);
 
 
-
-        System.out.println(salarySum(person));
     }
 
-    public static Employee[] addNewEmployee(Employee[] person, Employee employee) {
+    public static boolean addNewEmployee(Employee[] person, Employee employee) {
         for (int i = 0; i < person.length; i++) {
-            if (person[i] == null)
-                person[i] = employee;
-            break;
-        } return person; }
+            {
+                if (person[i] == null) {
+                    person[i] = employee;
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
 
-    public static int salarySum(Employee[]person) {
+    public static int salarySum(Employee[] person) {
         int sum = 0;
-        for(Employee employee : person) {
+        for (Employee employee : person) {
             sum += employee.getSalary();
         }
         return sum;
     }
 
+    public static int middleSalary(Employee[] person) {
+        int sum = 0;
+        for (Employee employee : person) {
+            sum += employee.getSalary();
+        }
+        int middleSum = sum / 10;
+        return middleSum;
+    }
 
-}
+    public static void printFullName(Employee employee) {
+        System.out.println(employee.getFullName());
+    }
+
+   // private static Employee[] person;
+
+    //public void departmentNumber(int departamentNum, Employee[] person) {
+      //  this.person = new Employee[departamentNum];
+    //}
+
+    public static void minAndMaxSalaryInDepartment(int departmentNum) {
+        Employee[] person= new Employee[employee.getSalary()];
+        Employee minSalary= person[0];
+        for (int i = 0; i < person.length; i++) {
+            Employee value = person[i];
+            {if(employee.getDepartmentNum() == (departmentNum) && employee.getSalary() > minSalary)
+                 minSalary = value; }
+            System.out.println(minSalary);
+            } }
+
+    }
+
+
+
+
 
 
 
