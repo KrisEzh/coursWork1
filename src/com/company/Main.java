@@ -1,10 +1,10 @@
 package com.company;
 
 public class Main {
-    Employee[] person;
-    static Employee employee;
-    public static void main(String[] args) {
+    private static Employee[] employees = new Employee[10];
+    public static Employee employee;
 
+    public static void main(String[] args) {
 
         Employee one = new Employee("Иванов Иван Иванович", 1, 80_000);
         Employee two = new Employee("Петров Петр Петрович", 2, 85_000);
@@ -17,40 +17,39 @@ public class Main {
         Employee nine = new Employee("Миронов Мирон Миронович", 4, 40_000);
         Employee ten = new Employee("Гордеев Гордей Гордеевич", 5, 50_000);
 
-        Employee[] person = new Employee[10];
-        addNewEmployee(person, one);
-        addNewEmployee(person, two);
-        addNewEmployee(person, three);
-        addNewEmployee(person, four);
-        addNewEmployee(person, five);
-        addNewEmployee(person, six);
-        addNewEmployee(person, seven);
-        addNewEmployee(person, eight);
-        addNewEmployee(person, nine);
-        addNewEmployee(person, ten);
+        addNewEmployee(employees, one);
+        addNewEmployee(employees, two);
+        addNewEmployee(employees, three);
+        addNewEmployee(employees, four);
+        addNewEmployee(employees, five);
+        addNewEmployee(employees, six);
+        addNewEmployee(employees, seven);
+        addNewEmployee(employees, eight);
+        addNewEmployee(employees, nine);
+        addNewEmployee(employees, ten);
 
         System.out.println("Employees");
         printEmployee(employee);
 
-        String nameMaxSalary = getMaxSalary(person).getFullName();
+        String nameMaxSalary = getMaxSalary().getFullName();
         System.out.println("Сотрудник с максимальной зарплатой : " + nameMaxSalary);
 
-        String nameMinSalary = getMinSalary(person).getFullName();
+        String nameMinSalary = getMinSalary().getFullName();
         System.out.println("Сотрудник с минимальной зарплатой : " + nameMinSalary);
 
-        System.out.println("Общая сумма затрат на зарплаты: " + salarySum(person));
-        System.out.println("Среднее значение зарплат: " + middleSalary(person));
+        System.out.println("Общая сумма затрат на зарплаты: " + salarySum());
+        System.out.println("Среднее значение зарплат: " + middleSalary());
 
         System.out.println("Все имена сотрудников : ");
-                printFullName(person);
+                printFullName();
 
     }
 
-    private static boolean addNewEmployee(Employee[] person, Employee employee) {
-        for (int i = 0; i < person.length; i++) {
+    private static boolean addNewEmployee(Employee[] employees, Employee employee) {
+        for (int i = 0; i < employees.length; i++) {
             {
-                if (person[i] == null) {
-                    person[i] = employee;
+                if (employees[i] == null) {
+                    employees[i] = employee;
                     return true;
                 }
             }
@@ -60,53 +59,54 @@ public class Main {
 
     private static void printEmployee(Employee employee) {System.out.println(employee);}
 
-    private static int salarySum(Employee[] person) {
+    private static int salarySum() {
         int sum = 0;
-        for (Employee employee : person) {
+        for (Employee employee : employees) {
             sum += employee.getSalary();
         }
         return sum;
     }
 
-    private static int middleSalary(Employee[] person) {
+    private static int middleSalary() {
         int salarySum = 0;
-        for (Employee employee : person) {
+        for (Employee employee : employees) {
             salarySum += employee.getSalary();
         }
         int middleSum = (int) (salarySum / (double) 10);
         return middleSum;
     }
 
-    private static Employee getMaxSalary(Employee[] person) {
+    private static Employee getMaxSalary() {
         float maxSalary = 0;
-        Employee nameMaxSalary = person[0];
-        for (int i = 0; i < person.length; i++) {
-            if (person[i].getSalary() > maxSalary) {
-                maxSalary = person[i].getSalary();
-                nameMaxSalary = person[i];
+        Employee nameMaxSalary = employees[0];
+        for (int i = 0; i < employees.length; i++) {
+            if (employees[i].getSalary() > maxSalary) {
+                maxSalary = employees[i].getSalary();
+                nameMaxSalary = employees[i];
             }
         }
         return nameMaxSalary;
     }
 
-    private static Employee getMinSalary(Employee[] person) {
-        float minSalary = person[0].getSalary();
-        Employee nameMinSalary = person[0];
-        for (int i = 0; i < person.length; i++) {
-            if (person[i].getSalary() < minSalary) {
-                minSalary = person[i].getSalary();
-                nameMinSalary = person[i];
+    private static Employee getMinSalary() {
+        float minSalary = employees[0].getSalary();
+        Employee nameMinSalary = employees[0];
+        for (int i = 0; i < employees.length; i++) {
+            if (employees[i].getSalary() < minSalary) {
+                minSalary = employees[i].getSalary();
+                nameMinSalary = employees[i];
             }
         }
         return nameMinSalary;
     }
 
-   public static void printFullName(Employee[]person) {
-        for (Employee employee : person) {
+   public static void printFullName() {
+        for (Employee employee : employees) {
             if (employee != null)
                 System.out.println(employee.getFullName());
         }
     }
+
 }
 
 
