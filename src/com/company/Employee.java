@@ -8,15 +8,15 @@ public class Employee {
     private int salary;
     private static int count = 1;
 
-    public Employee(String fullName, int departmentNum, int salary, int count) {
+    public Employee(String fullName, int departmentNum, int salary, int getCount) {
         this.fullName = fullName;
         this.departmentNum = departmentNum;
         this.salary = salary;
-        this.count = count;
+        this.count = count++;
 
     }
 
-    public static int getCount()
+   public static int getCount()
         {
             return count++;
         }

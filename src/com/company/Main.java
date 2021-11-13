@@ -52,13 +52,11 @@ public class Main {
         System.out.println(nine);
         System.out.println(ten);
 
-        List<Employee> salaries = Arrays.asList(one, two, three, four, five, six, seven, eight, nine, ten);
+        String nameMaxSalary = getMaxSalary(person).getFullName();
+        System.out.println("Сотрудник с максимальной зарплатой : " + nameMaxSalary);
 
-        Employee min = salaries.stream().collect(Collectors.minBy(Comparator.comparingInt(Employee::getSalary))).get();
-        System.out.println("Employee with min salary : " + min);
-
-        Employee max = salaries.stream().collect(Collectors.maxBy(Comparator.comparingInt(Employee::getSalary))).get();
-        System.out.println("Employee with max salary : " + max);
+        String nameMinSalary = getMinSalary(person).getFullName();
+        System.out.println("Сотрудник с минимальной зарплатой : " + nameMinSalary);
 
         System.out.println("Общая сумма затрат на зарплаты: " + salarySum(person));
         System.out.println("Среднее значение зарплат: " + middleSalary(person));
@@ -90,7 +88,7 @@ public class Main {
         ten.setSalary((int) (ten.getSalary() * 1.05));
         System.out.println(ten.getSalary());
 
-        minAndMaxSalaryInDepartment(1);
+    //    minAndMaxSalaryInDepartment(1);
 
 
     }
@@ -120,8 +118,31 @@ public class Main {
         for (Employee employee : person) {
             sum += employee.getSalary();
         }
-        int middleSum = sum / 10;
+        int middleSum = (int) (sum / (double) 10);
         return middleSum;
+    }
+    public static Employee getMaxSalary(Employee[]person) {
+        float maxSalary = 0;
+        Employee nameMaxSalary = person[0];
+        for(int i = 0; i<person.length; i++) {
+            if(person[i].getSalary()>maxSalary) {
+                maxSalary = person[i].getSalary();
+                nameMaxSalary = person[i];
+            }
+        }
+        return nameMaxSalary;
+    }
+    public static Employee getMinSalary(Employee[]person) {
+        float minSalary = person[0].getSalary();
+        Employee nameMinSalary = person[0];
+        for (int i = 0; i < person.length; i++) {
+            if(person[i].getSalary()<minSalary) {
+                minSalary = person[i].getSalary();
+                nameMinSalary = person[i];
+            }
+
+        }
+        return nameMinSalary;
     }
 
     public static void printFullName(Employee employee) {
@@ -134,15 +155,15 @@ public class Main {
       //  this.person = new Employee[departamentNum];
     //}
 
-    public static void minAndMaxSalaryInDepartment(int departmentNum) {
-        Employee[] person= new Employee[employee.getSalary()];
-        Employee minSalary= person[0];
-        for (int i = 0; i < person.length; i++) {
-            Employee value = person[i];
-            {if(employee.getDepartmentNum() == (departmentNum) && employee.getSalary() > minSalary)
-                 minSalary = value; }
-            System.out.println(minSalary);
-            } }
+    //public static void minAndMaxSalaryInDepartment(int departmentNum) {
+        //Employee[] person= new Employee[employee.getSalary()];
+       // Employee minSalary= person[0];
+        //for (int i = 0; i < person.length; i++) {
+          //  Employee value = person[i];
+  //          {if(employee.getDepartmentNum() == (departmentNum) && employee.getSalary() >  person)
+    //             minSalary = value; }
+      //      System.out.println(minSalary);
+        //    } }
 
     }
 
