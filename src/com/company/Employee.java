@@ -6,7 +6,7 @@ public class Employee {
     private String fullName;
     private int departmentNum;
     private int salary;
-    private int id;
+    private final int id;
     private static int count = 1;
 
     public Employee(String fullName, int departmentNum, int salary) {
@@ -37,11 +37,12 @@ public class Employee {
 
     @Override
     public String toString() {
-        return "Employee" +
+        return "Employee{" +
                 " id "  +
                 ", fullName " + getFullName() +
                 ", dep.number " + getDepartmentNum() +
-                ", salary " +  getSalary();
+                ", salary " +  getSalary() +
+                '}';
     }
 
 }

@@ -1,35 +1,30 @@
 package com.company;
 
+import java.util.Arrays;
+
 public class Main {
     private static Employee[] employees = new Employee[10];
     public static Employee employee;
 
     public static void main(String[] args) {
 
-        Employee one = new Employee("Иванов Иван Иванович", 1, 80_000);
-        Employee two = new Employee("Петров Петр Петрович", 2, 85_000);
-        Employee three = new Employee("Сергеев Сергей Сергеевич", 3, 60_000);
-        Employee four = new Employee("Александров Александр Александрович", 4, 75_000);
-        Employee five = new Employee("Алексеев Алексей Алексеевич", 5, 45_000);
-        Employee six = new Employee("Романов Роман Романович", 1, 30_000);
-        Employee seven = new Employee("Георгиев Георгий Георгиевич", 2, 95_000);
-        Employee eight = new Employee("Евгеньев Евгений Евгеньевич", 3, 25_000);
-        Employee nine = new Employee("Миронов Мирон Миронович", 4, 40_000);
-        Employee ten = new Employee("Гордеев Гордей Гордеевич", 5, 50_000);
-
-        addNewEmployee(employees, one);
-        addNewEmployee(employees, two);
-        addNewEmployee(employees, three);
-        addNewEmployee(employees, four);
-        addNewEmployee(employees, five);
-        addNewEmployee(employees, six);
-        addNewEmployee(employees, seven);
-        addNewEmployee(employees, eight);
-        addNewEmployee(employees, nine);
-        addNewEmployee(employees, ten);
+        addNewEmployee(new Employee("Иванов Иван Иванович", 1, 80_000));
+        addNewEmployee(new Employee("Петров Петр Петрович", 2, 85_000));
+        addNewEmployee(new Employee("Сергеев Сергей Сергеевич", 3, 60_000));
+        addNewEmployee(new Employee("Александров Александр Александрович", 4, 75_000));
+        addNewEmployee(new Employee("Алексеев Алексей Алексеевич", 5, 45_000));
+        addNewEmployee(new Employee("Романов Роман Романович", 1, 30_000));
+        addNewEmployee(new Employee("Георгиев Георгий Георгиевич", 2, 95_000));
+        addNewEmployee(new Employee("Евгеньев Евгений Евгеньевич", 3, 25_000));
+        addNewEmployee(new Employee("Миронов Мирон Миронович", 4, 40_000));
+        addNewEmployee(new Employee("Гордеев Гордей Гордеевич", 5, 50_000));
 
         System.out.println("Employees");
-        printEmployee(employee);
+        for(Employee employee:employees) {
+            if(employee != null) {
+                printEmployee(employee);
+            }
+        }
 
         String nameMaxSalary = getMaxSalary().getFullName();
         System.out.println("Сотрудник с максимальной зарплатой : " + nameMaxSalary);
@@ -45,11 +40,11 @@ public class Main {
 
     }
 
-    private static boolean addNewEmployee(Employee[] employees, Employee employee) {
+    private static boolean addNewEmployee(Employee employee) {
         for (int i = 0; i < employees.length; i++) {
             {
-                if (employees[i] == null) {
-                    employees[i] = employee;
+                if (Main.employees[i] == null) {
+                    Main.employees[i] = employee;
                     return true;
                 }
             }
@@ -57,7 +52,7 @@ public class Main {
         return false;
     }
 
-    private static void printEmployee(Employee employee) {System.out.println(employee);}
+    private static void printEmployee(Employee employee) { System.out.println(employee); }
 
     private static int salarySum() {
         int sum = 0;
@@ -68,11 +63,11 @@ public class Main {
     }
 
     private static int middleSalary() {
-        int salarySum = 0;
+        int salarySum = salarySum();
         for (Employee employee : employees) {
             salarySum += employee.getSalary();
         }
-        int middleSum = (int) (salarySum / (double) 10);
+        int middleSum = (int) (salarySum() / (double) 10);
         return middleSum;
     }
 
